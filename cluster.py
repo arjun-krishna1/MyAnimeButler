@@ -1,16 +1,19 @@
 import json
+
+with open("anime_key_users_value1.json") as f:
+    anime_table = json.load(f)
+
 with open("users_key_anime_value1.json") as f:
-    data = json.load(f)
-    print(data["5"])
-
-    
-
+    user_table = json.load(f)
 
 def find_similar_users(user_id):
     animes_watched = user_table[user_id]
     similar_users = []
     for i in animes_watched:
-        similar_users += anime_table[i]
+        if str(i) in anime_table:
+            similar_users += anime_table[str(i)]
+##        else:
+##            print("doesn't exist")
     user_prevelence = {i : 0 for i in similar_users}
     for i in similar_users:
         user_prevelence[i] += 1
@@ -32,4 +35,3 @@ def find_similar_animes(user_id, user_prevelence):
             if i not in user_table[i]:
                 return i
     return 1
-
