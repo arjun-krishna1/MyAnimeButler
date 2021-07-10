@@ -18,7 +18,7 @@ def index():
         anime_name = request.form["anime-name"]
 
         if anime_name not in anime_choices:
-            output = "not know anime"
+            output = f"'{anime_name}' is unknown"
             #return or something
         else:
             if anime_name in anime_choices:
