@@ -1,4 +1,5 @@
 from flask import *
+import os
 import cluster
 app = Flask(__name__)
 
@@ -16,7 +17,7 @@ def index():
     if request.method == "POST":
         anime_name = request.form["anime-name"]
 
-        if anime_name not in anime_choices
+        if anime_name not in anime_choices:
             output = "not know anime"
             #return or something
         else:
@@ -30,7 +31,7 @@ def index():
 
         return render_template("index.html", suggested_name=output, dropdown_choices = anime_choices)
 
-    return render_template("index.html")
+    return render_template("index.html", dropdown_choices = anime_choices)
 
 
 #Borrowed from https://gist.github.com/itsnauman/b3d386e4cecf97d59c94
