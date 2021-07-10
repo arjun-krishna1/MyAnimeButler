@@ -16,7 +16,7 @@ def index():
     if request.method == "POST":
         anime_name = request.form["anime-name"]
 
-        if anime_name not in anime_names.keys():
+        if anime_name not in anime_choices
             output = "not know anime"
             #return or something
         else:
@@ -28,7 +28,7 @@ def index():
             similar_anime_name = anime_id_to_names[str(similar_anime_id)]
             output = similar_anime_name
 
-            return render_template("index.html", suggested_name=output, dropdown_choices = anime_choices)
+        return render_template("index.html", suggested_name=output, dropdown_choices = anime_choices)
 
     return render_template("index.html")
 
