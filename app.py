@@ -299,17 +299,16 @@ suggested_anime = "Select an anime below for a new recommendation!"
 @app.route("/", methods=["GET"])
 @app.route("/home/", methods=["GET"])
 def index():
+
     return render_template("index.html",
                            dropdown_choices=anime_choices,
                            suggested_name=suggested_anime)
 
 
-@app.route("/", methods=["POST"])
 @app.route("/home/<name>", methods=["GET"])
 def add_anime(name):
     if request.method == "GET":
         anime_name = name
-
         if anime_name not in anime_choices:
             output = f"'{anime_name}' is unknown"
             # return or something
