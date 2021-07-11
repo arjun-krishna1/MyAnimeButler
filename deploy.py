@@ -1,6 +1,7 @@
 from flask import *
 import os
 import cluster
+
 app = Flask(__name__)
 
 with open("anime_name_key_anime_id_value1.json") as f:
@@ -16,7 +17,7 @@ anime_choices = ['Cowboy Bebop', 'Trigun', 'Witch Hunter Robin', 'Beet the Vande
 def index():
     if request.method == "POST":
         anime_name = request.form["anime-name"]
-        print(history)
+
         if anime_name not in anime_choices:
             output = f"'{anime_name}' is unknown"
             #return or something
@@ -50,5 +51,5 @@ def dated_url_for(endpoint, **values):
 
 
 if __name__ == "__main__":
-    #app.run(host='localhost', debug=False, port=8000, threaded=True)
-    app.run(debug=True)
+    app.debug = True
+    app.run()
