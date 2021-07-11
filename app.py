@@ -292,17 +292,8 @@ anime_choices = ['Cowboy Bebop', 'Trigun', 'Witch Hunter Robin', 'Beet the Vande
                  'Bakukyuu Renpatsu! Super Bedaman', 'Chousoku Spinner', 'Kaiketsu Jouki Tanteidan',
                  'Bakusou Kyoudai Let&#039;s &amp; Go', 'Bakusou Kyoudai Let&#039;s &amp; Go WGP',
                  'Majime ni Fumajime Kaiketsu Zorori']
-
+blacklist = []
 suggested_anime = "Select an anime below for a new recommendation!"
-
-
-@app.route("/", methods=["GET"])
-@app.route("/home/", methods=["GET"])
-def index():
-
-    return render_template("index.html",
-                           dropdown_choices=anime_choices,
-                           suggested_name=suggested_anime)
 
 
 @app.route("/home/<name>", methods=["GET"])
@@ -313,16 +304,35 @@ def add_anime(name):
             output = f"'{anime_name}' is unknown"
             # return or something
         else:
-            if anime_name in anime_choices:
-                anime_choices.remove(anime_name)
+            anime_choices.remove(anime_name)
             history.append(anime_names[anime_name])
             user_prevelence = cluster.find_similar_users(animes_watched=history)
-            similar_anime_id = cluster.find_similar_animes(history, user_prevelence)
+            similar_anime_id = cluster.find_similar_animes(history, user_prevelence, blacklist)
             similar_anime_name = anime_id_to_names[str(similar_anime_id)]
             global suggested_anime
             suggested_anime = similar_anime_name
-
     return redirect(url_for('index'))
+
+
+@app.route("/", methods = ["GET", "POST"])
+@app.route("/home/", methods = ["GET", "POST"])
+def index():
+    global suggested_anime
+    if request.method == "POST":
+        if "remove-anime-button" in request.form:
+            blacklist.append(suggested_anime)
+            if suggested_anime in anime_choices:
+                anime_choices.remove(suggested_anime)
+            user_prevelence = cluster.find_similar_users(animes_watched=history)
+            if user_prevelence:
+                similar_anime_id = cluster.find_similar_animes(history, user_prevelence, blacklist)
+                similar_anime_name = anime_id_to_names[str(similar_anime_id)]
+                suggested_anime = similar_anime_name
+        return render_template("index.html", suggested_name=suggested_anime, dropdown_choices = anime_choices)
+
+    return render_template("index.html",
+                       dropdown_choices=anime_choices,
+                       suggested_name=suggested_anime)
 
 
 # Borrowed from https://gist.github.com/itsnauman/b3d386e4cecf97d59c94

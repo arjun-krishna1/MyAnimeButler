@@ -1,8 +1,11 @@
 import json
-import time
+import random
 
 with open("anime_key_users_value1.json") as f:
     anime_table = json.load(f)
+
+with open("anime_id_key_anime_name_value.json") as f:
+    anime_id_to_names = json.loads(f.read())
 
 with open("users_key_anime_value1.json") as f:
     user_table = json.load(f)
@@ -25,13 +28,11 @@ def find_similar_users(user_id = None, animes_watched = None):
     user_prevelence.sort(reverse = True, key = lambda x : x[1])
     return user_prevelence
     
-def find_similar_animes(animes_watched, user_prevelence):
+def find_similar_animes(animes_watched, user_prevelence, blacklist):
     # get closest users
     current_neighbours = []
-    starter = user_prevelence[0][1]
     for i in user_prevelence:
-        if i[1] == starter:
-            current_neighbours.append(i[0])
+        current_neighbours.append(i[0])
 
     # get all the animes of this new user\
     similar_animes = []
@@ -43,5 +44,8 @@ def find_similar_animes(animes_watched, user_prevelence):
         anime_prevelence[i] += 1
     anime_prevelence = [(i, anime_prevelence[i]) for i in anime_prevelence]
     anime_prevelence.sort(reverse=True, key = lambda x : x[1])
-    return anime_prevelence[0][0]
+    for i in anime_prevelence:
+        if str(i[0]) not in blacklist and str(i) in anime_id_to_names.keys():
+            return i[0]
+    return random.choice(list(anime_id_to_names.keys()))
 
