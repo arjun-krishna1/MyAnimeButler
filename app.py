@@ -16,7 +16,7 @@ anime_choices = ['Cowboy Bebop', 'Trigun', 'Witch Hunter Robin', 'Beet the Vande
 def index():
     if request.method == "POST":
         anime_name = request.form["anime-name"]
-
+        print(history)
         if anime_name not in anime_choices:
             output = f"'{anime_name}' is unknown"
             #return or something
