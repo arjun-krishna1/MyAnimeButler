@@ -45,11 +45,3 @@ def find_similar_animes(animes_watched, user_prevelence):
     anime_prevelence.sort(reverse=True, key = lambda x : x[1])
     return anime_prevelence[0][0]
 
-
-
-
-
-if __name__ == "__main__":
-    user_id = "76"
-    user_prevelence = find_similar_users(user_id)
-    print(find_similar_animes(user_table[user_id], user_prevelence))
