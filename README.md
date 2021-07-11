@@ -1,4 +1,4 @@
-# MyAnimeButler
+# AnimeButler
 ## I'm one hell of a butler. If you need to find anime
 ![image](https://user-images.githubusercontent.com/45014214/125163100-7834d780-e159-11eb-9dd6-ac2ed2742f0c.png)
 ## Plan
