@@ -37,9 +37,10 @@
           {% endfor %}
         </datalist>
 
-        <input id="add-anime-button" type="submit" value="Add anime">
+        <input name="add-anime-button" type="submit" value="Add anime">
+        <h1>{{ suggested_name }}</h1><br>
+        <input name="remove-anime-button" type = "submit" value = "Don't show me this result">
 
-        <h1>{{ suggested_name }}</h1>
         </form>
       </div>
 
