@@ -1,13 +1,13 @@
 import json
 import random
 
-with open("anime_key_users_value1.json") as f:
+with open("data/anime_key_users_value1.json") as f:
     anime_table = json.load(f)
 
-with open("anime_id_key_anime_name_value.json") as f:
+with open("data/anime_id_key_anime_name_value.json") as f:
     anime_id_to_names = json.loads(f.read())
 
-with open("users_key_anime_value1.json") as f:
+with open("data/users_key_anime_value1.json") as f:
     user_table = json.load(f)
 
 def find_similar_users(user_id = None, animes_watched = None):
