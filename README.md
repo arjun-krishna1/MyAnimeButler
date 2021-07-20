@@ -1,5 +1,5 @@
 # MyAnimeButler
-## Find new animes to love
+## Find new animes to love!
 ### [Hackathon Winner](https://devpost.com/software/myanimebutler?ref_content=my-projects-tab&ref_feature=my_projects)
 - Anime Recommendation Engine
 - Implemented a [clustering algorithm](https://github.com/arjun-krishna1/MyAnimeButler/blob/main/cluster.py) inspired by the machine learning k-means clustering algorithm within a weekend in Python
